@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "856696938467",
+    "firebase_url": "https://helpdesk-cb1c9-default-rtdb.firebaseio.com",
+    "project_id": "helpdesk-cb1c9",
+    "storage_bucket": "helpdesk-cb1c9.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:856696938467:android:c298f7b561e946ab6b0ad6",
+        "android_client_info": {
+          "package_name": "com.example.nc212543_lm212528"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBZIVsjYeRMCLDU6cWMuqNcuZXFDuj6iek"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

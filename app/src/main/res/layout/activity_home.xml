@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".HomeActivity">
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:padding="5dp">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="135dp"
+            android:padding="0.2dp"
+            app:cardBackgroundColor="@color/charcoal"
+            app:cardCornerRadius="5dp"
+            app:cardUseCompatPadding="true">
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="10dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="BienvenidoPrincipal"
+                    android:textColor="#fff"
+                    android:textSize="20sp" />
+
+                <ProgressBar
+                    android:id="@+id/progressBarDatos"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="10dp" />
+
+                <!--NOMBRES-->
+                <TextView
+                    android:id="@+id/UidPrincipal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="UidPrincipal"
+                    android:textColor="#fff"
+                    android:textSize="15sp"
+                    android:visibility="gone" />
+
+                <!--NOMBRES-->
+                <TextView
+                    android:id="@+id/NombresPrincipal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="NombresPrincipal"
+                    android:textColor="#fff"
+                    android:textSize="20sp"
+                    android:visibility="gone" />
+
+                <!---CORREO-->
+                <TextView
+                    android:id="@+id/CorreoPrincipal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="CorreoPrincipal"
+                    android:textColor="#fff"
+                    android:textSize="20sp"
+                    android:visibility="gone" />
+            </androidx.appcompat.widget.LinearLayoutCompat>
+        </androidx.cardview.widget.CardView>
+
+        <Button
+            android:id="@+id/btnAgregarTicket"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:enabled="true"
+            android:text="Agregar ticket" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerviewTickets"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+</ScrollView>
