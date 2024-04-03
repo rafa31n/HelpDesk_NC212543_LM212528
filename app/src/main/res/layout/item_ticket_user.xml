@@ -1,0 +1,81 @@
+<!-- item_layout.xml -->
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/cardView"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp"
+    android:elevation="4dp"
+    android:radius="8dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <TextView
+            android:id="@+id/textViewTituloU"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Título del Ticket"
+            android:textColor="@android:color/black"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/textViewDescripcionU"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Descripción del Ticket"
+            android:textColor="@android:color/black"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/textViewFechaCreacionU"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Fecha creacion del Ticket"
+            android:textColor="@android:color/black"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/textViewEstadoU"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Estado del Ticket"
+            android:textColor="@android:color/black"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/textViewFechaFinalizacionU"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Fecha finalizacion del Ticket"
+            android:textColor="@android:color/black"
+            android:textSize="14sp" />
+
+        <!-- Botones -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="3dp"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btnEditar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:backgroundTint="@color/charcoal"
+                android:text="Editar" />
+
+            <Button
+                android:id="@+id/btnEliminar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:backgroundTint="@color/charcoal"
+                android:text="Eliminar" />
+        </LinearLayout>
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

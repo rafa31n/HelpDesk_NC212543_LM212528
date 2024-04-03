@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".HomeActivity">
+    tools:context=".HomeUserActivity">
 
     <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
@@ -17,9 +17,10 @@
             android:layout_width="match_parent"
             android:layout_height="135dp"
             android:padding="0.2dp"
-            app:cardBackgroundColor="@color/charcoal"
+            app:cardBackgroundColor="@color/lightBlue"
             app:cardCornerRadius="5dp"
-            app:cardUseCompatPadding="true">
+            app:cardUseCompatPadding="true"
+            android:layout_marginTop="15dp">
 
             <androidx.appcompat.widget.LinearLayoutCompat
                 android:layout_width="match_parent"
@@ -28,63 +29,38 @@
                 android:padding="10dp">
 
                 <TextView
+                    android:id="@+id/textViewTitulo"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="BienvenidoPrincipal"
+                    android:text="Bienvenido"
                     android:textColor="#fff"
                     android:textSize="20sp" />
 
-                <ProgressBar
-                    android:id="@+id/progressBarDatos"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="10dp" />
-
                 <!--NOMBRES-->
                 <TextView
-                    android:id="@+id/UidPrincipal"
+                    android:id="@+id/textViewCorreo"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="UidPrincipal"
+                    android:text="Correo"
                     android:textColor="#fff"
-                    android:textSize="15sp"
-                    android:visibility="gone" />
-
-                <!--NOMBRES-->
-                <TextView
-                    android:id="@+id/NombresPrincipal"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="NombresPrincipal"
-                    android:textColor="#fff"
-                    android:textSize="20sp"
-                    android:visibility="gone" />
+                    android:textSize="20sp" />
 
                 <!---CORREO-->
                 <TextView
-                    android:id="@+id/CorreoPrincipal"
+                    android:id="@+id/textViewRol"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="CorreoPrincipal"
+                    android:text="Rol"
                     android:textColor="#fff"
-                    android:textSize="20sp"
-                    android:visibility="gone" />
+                    android:textSize="20sp" />
             </androidx.appcompat.widget.LinearLayoutCompat>
         </androidx.cardview.widget.CardView>
 
-        <Button
-            android:id="@+id/btnAgregarTicket"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:enabled="true"
-            android:text="Agregar ticket" />
-
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerviewTickets"
+            android:id="@+id/recyclerViewTicketsA"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
+
     </androidx.appcompat.widget.LinearLayoutCompat>
 
 

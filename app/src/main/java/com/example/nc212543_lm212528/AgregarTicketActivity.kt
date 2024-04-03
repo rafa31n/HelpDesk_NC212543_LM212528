@@ -8,9 +8,6 @@ import android.widget.EditText
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
-import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import java.text.SimpleDateFormat
@@ -55,7 +52,7 @@ class AgregarTicketActivity : AppCompatActivity() {
 
                 database.child(numeroTicket.toString()).setValue(ticket).addOnSuccessListener {
                     Toast.makeText(this, "Se guardo con exito", Toast.LENGTH_SHORT).show()
-                    val intent = Intent(getBaseContext(), HomeActivity::class.java)
+                    val intent = Intent(getBaseContext(), HomeUserActivity::class.java)
                     startActivity(intent)
                 }.addOnFailureListener {
                     Toast.makeText(this, "No se pudo generar el ticket.", Toast.LENGTH_SHORT).show()

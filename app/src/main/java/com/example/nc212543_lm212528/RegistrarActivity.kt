@@ -2,9 +2,9 @@ package com.example.nc212543_lm212528
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.widget.Button
 import android.widget.EditText
+import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -48,6 +48,13 @@ class RegistrarActivity : AppCompatActivity() {
                 val nombreCompleto = nombres.trim() + " " + apellido.trim()
                 signUp(correo, password, nombreCompleto)
             }
+        }
+
+        //
+        val txtIniciarSesion = findViewById<TextView>(R.id.textViewLogin)
+        txtIniciarSesion.setOnClickListener {
+            val intent = Intent(getBaseContext(), LoginActivity::class.java)
+            startActivity(intent)
         }
     }
 

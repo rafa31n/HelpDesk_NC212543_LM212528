@@ -1,7 +1,5 @@
 package com.example.nc212543_lm212528
 
-import java.util.Date
-
 class Ticket {
     var numTicket: Int? = 0
     var titulo: String? = null
