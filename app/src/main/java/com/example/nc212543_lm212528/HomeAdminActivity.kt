@@ -70,6 +70,7 @@ class HomeAdminActivity : AppCompatActivity() {
 
                     recyclerView.layoutManager = LinearLayoutManager(this@HomeAdminActivity)
                     recyclerView.adapter = TicketAdapterAdmin(tickets)
+                    
                 }
 
                 override fun onCancelled(databaseError: DatabaseError) {
