@@ -22,6 +22,7 @@ class TicketAdapterAdmin(private val tickets: MutableList<Ticket>) :
         val textViewUsuario: TextView = itemView.findViewById(R.id.textViewUsuarioA)
         val textViewFechaCreacion: TextView = itemView.findViewById(R.id.textViewFechaCreacionA)
         val textViewEstado: TextView = itemView.findViewById(R.id.textViewEstadoA)
+        val textViewDepto: TextView = itemView.findViewById(R.id.textViewDepto)
         val textViewFechaFinalizacion: TextView =
             itemView.findViewById(R.id.textViewFechaFinalizacionA)
         val btnFinalizar: Button = itemView.findViewById(R.id.btnFinalizar)
@@ -45,9 +46,10 @@ class TicketAdapterAdmin(private val tickets: MutableList<Ticket>) :
         holder.itemView.visibility = View.VISIBLE
         holder.textViewTitulo.text = ticket.titulo
         holder.textViewDescripcion.text = ticket.descripcion
-        holder.textViewUsuario.text = ticket.autorTicket
-        holder.textViewFechaCreacion.text = ticket.fechaCreacion
-        holder.textViewEstado.text = ticket.estado
+        holder.textViewUsuario.text = "Autor: " + ticket.autorTicket
+        holder.textViewFechaCreacion.text = "Fecha creación: " + ticket.fechaCreacion
+        holder.textViewEstado.text = "Estado: " + ticket.estado
+        holder.textViewDepto.text = "Departamento: " + ticket.departamento
         holder.textViewFechaFinalizacion.text = ticket.fechaFinalizacion
         holder.btnFinalizar.setOnClickListener {
             // Maneja la acción de finalizar el ticket

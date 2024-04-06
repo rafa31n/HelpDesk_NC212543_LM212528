@@ -28,7 +28,7 @@
             android:layout_height="wrap_content"
             android:text="Descripción del Ticket"
             android:textColor="@android:color/black"
-            android:textSize="16sp" />
+            android:textSize="14sp" />
 
         <TextView
             android:id="@+id/textViewUsuarioA"
@@ -36,7 +36,7 @@
             android:layout_height="wrap_content"
             android:text="Usuario del Ticket"
             android:textColor="@android:color/black"
-            android:textSize="16sp" />
+            android:textSize="14sp" />
 
         <TextView
             android:id="@+id/textViewFechaCreacionA"
@@ -51,6 +51,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Estado del Ticket"
+            android:textColor="@android:color/black"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/textViewDepto"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Departamento del Ticket"
             android:textColor="@android:color/black"
             android:textSize="14sp" />
 
