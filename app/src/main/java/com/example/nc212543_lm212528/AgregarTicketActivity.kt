@@ -28,6 +28,10 @@ class AgregarTicketActivity : AppCompatActivity() {
         enableEdgeToEdge()
         setContentView(R.layout.activity_agregar_ticket)
 
+        val datos: Bundle? = intent.extras
+        val nombreUsuario = datos?.getString("nombreUsuario").toString()
+        val correoUsuario = datos?.getString("correoUsuario").toString()
+        val rolUsuario = datos?.getString("rolUsuario").toString()
 
         edtTitulo = findViewById<EditText>(R.id.editTextTitle)
         edtDescripcion = findViewById<EditText>(R.id.editTextDescription)
@@ -45,14 +49,17 @@ class AgregarTicketActivity : AppCompatActivity() {
                 val numeroTicket = Random.nextInt(101)
                 val fechaActual = getFechaActual()
                 val ticket = Ticket(
-                    numeroTicket, titulo, descripcion, "HelpDesk", "Mario",
-                    "mario@gmail.com", fechaActual, "Activo", null
+                    numeroTicket, titulo, descripcion, "HelpDesk", nombreUsuario,
+                    correoUsuario, fechaActual, "Activo", null
                 )
                 database = FirebaseDatabase.getInstance().getReference("tickets")
 
                 database.child(numeroTicket.toString()).setValue(ticket).addOnSuccessListener {
                     Toast.makeText(this, "Se guardo con exito", Toast.LENGTH_SHORT).show()
                     val intent = Intent(getBaseContext(), HomeUserActivity::class.java)
+                    intent.putExtra("nombreUsuario", nombreUsuario)
+                    intent.putExtra("correoUsuario", correoUsuario)
+                    intent.putExtra("rolUsuario", rolUsuario)
                     startActivity(intent)
                 }.addOnFailureListener {
                     Toast.makeText(this, "No se pudo generar el ticket.", Toast.LENGTH_SHORT).show()

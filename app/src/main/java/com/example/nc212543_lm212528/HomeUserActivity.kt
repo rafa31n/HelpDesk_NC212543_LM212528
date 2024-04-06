@@ -1,13 +1,14 @@
 package com.example.nc212543_lm212528
 
-import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
@@ -16,32 +17,53 @@ import com.google.firebase.database.ValueEventListener
 
 class HomeUserActivity : AppCompatActivity() {
     private lateinit var databaseT: DatabaseReference
+    private lateinit var recyclerView: RecyclerView
+    private lateinit var firebaseAuth: FirebaseAuth
 
-    @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home_user)
+        setupViews()
+        loadTicketsFromFirebase()
+    }
 
+    override fun onResume() {
+        super.onResume()
+        loadTicketsFromFirebase()
+    }
+
+    private fun setupViews() {
         val txtTitulo = findViewById<TextView>(R.id.textViewTitulo)
         val txtCorreo = findViewById<TextView>(R.id.textViewCorreo)
         val txtRol = findViewById<TextView>(R.id.textViewRol)
-        val datos: Bundle? = intent.getExtras()
+        val btnSalir = findViewById<Button>(R.id.btnSalirU)
+        val datos: Bundle? = intent.extras
         val nombreUsuario = datos?.getString("nombreUsuario").toString()
         val correoUsuario = datos?.getString("correoUsuario").toString()
         val rolUsuario = datos?.getString("rolUsuario").toString()
-        txtTitulo.text = "Bienvenido " + nombreUsuario
+        txtTitulo.text = "Bienvenido $nombreUsuario"
         txtCorreo.text = correoUsuario
-        txtRol.text = "Rol: " + rolUsuario
+        txtRol.text = "Rol: $rolUsuario"
 
         val btnCrearTicket = findViewById<Button>(R.id.btnAgregarTicket)
         btnCrearTicket.setOnClickListener {
-            val intent = Intent(getBaseContext(), AgregarTicketActivity::class.java)
-            //intent.putExtra("nombreUsuario", currentUser.)
+            val intent = Intent(this, AgregarTicketActivity::class.java)
+            intent.putExtra("nombreUsuario", nombreUsuario)
+            intent.putExtra("correoUsuario", correoUsuario)
+            intent.putExtra("rolUsuario", rolUsuario)
             startActivity(intent)
         }
 
-        // VER TICKETS USUARIO
-        val recyclerView = findViewById<RecyclerView>(R.id.recyclerViewTicketsU)
+        btnSalir.setOnClickListener {
+            firebaseAuth.signOut()
+            startActivity(Intent(this@HomeUserActivity, LoginActivity::class.java))
+            Toast.makeText(this, "Cerraste sesión exitosamente", Toast.LENGTH_SHORT).show()
+        }
+        recyclerView = findViewById(R.id.recyclerViewTicketsU)
+    }
+
+    private fun loadTicketsFromFirebase() {
+        val correoUsuario = intent.getStringExtra("correoUsuario") ?: return
         databaseT = FirebaseDatabase.getInstance().getReference("tickets")
         databaseT.orderByChild("emailAutor").equalTo(correoUsuario)
             .addListenerForSingleValueEvent(object : ValueEventListener {
@@ -65,7 +87,6 @@ class HomeUserActivity : AppCompatActivity() {
                         val fechaFinalizacion: String? =
                             snapshot.child("fechaFinalizacion").getValue(String::class.java)
 
-
                         val ticket =
                             Ticket(
                                 numTicket,
@@ -87,17 +108,7 @@ class HomeUserActivity : AppCompatActivity() {
 
                 override fun onCancelled(databaseError: DatabaseError) {
                     // Manejar errores
-
                 }
             })
     }
-
-    /*override fun onStart() {
-        val datos: Bundle? = intent.getExtras()
-        if (datos == null) {
-            val intent = Intent(getBaseContext(), LoginActivity::class.java)
-            startActivity(intent)
-        }
-        super.onStart()
-    }*/
 }

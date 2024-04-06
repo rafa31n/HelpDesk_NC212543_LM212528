@@ -1,67 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".HomeUserActivity">
+    android:padding="16dp">
 
-    <androidx.appcompat.widget.LinearLayoutCompat
-        android:layout_width="match_parent"
+    <TextView
+        android:id="@+id/textViewTitulo"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:orientation="vertical"
-        android:padding="5dp">
+        android:text="Bienvenido"
+        android:textColor="#000"
+        android:textSize="20sp" />
 
-        <androidx.cardview.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="135dp"
-            android:padding="0.2dp"
-            app:cardBackgroundColor="@color/lightBlue"
-            app:cardCornerRadius="5dp"
-            app:cardUseCompatPadding="true"
-            android:layout_marginTop="15dp">
+    <!--NOMBRES-->
+    <TextView
+        android:id="@+id/textViewCorreo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textViewTitulo"
+        android:text="Correo"
+        android:textColor="#000"
+        android:textSize="20sp" />
 
-            <androidx.appcompat.widget.LinearLayoutCompat
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="10dp">
+    <!---CORREO-->
+    <TextView
+        android:id="@+id/textViewRol"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textViewCorreo"
+        android:text="Rol"
+        android:textColor="#000"
+        android:textSize="20sp" />
 
-                <TextView
-                    android:id="@+id/textViewTitulo"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Bienvenido"
-                    android:textColor="#fff"
-                    android:textSize="20sp" />
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewTicketsA"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/textViewRol" />
 
-                <!--NOMBRES-->
-                <TextView
-                    android:id="@+id/textViewCorreo"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Correo"
-                    android:textColor="#fff"
-                    android:textSize="20sp" />
+    <TextView
+        android:id="@+id/textViewMensaje"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/recyclerViewTicketsA"
+        android:layout_marginTop="25dp"
+        android:text="Mensaje"
+        android:textColor="#000"
+        android:textSize="12sp"
+        android:visibility="gone" />
 
-                <!---CORREO-->
-                <TextView
-                    android:id="@+id/textViewRol"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Rol"
-                    android:textColor="#fff"
-                    android:textSize="20sp" />
-            </androidx.appcompat.widget.LinearLayoutCompat>
-        </androidx.cardview.widget.CardView>
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerViewTicketsA"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-
-    </androidx.appcompat.widget.LinearLayoutCompat>
-
-
-</ScrollView>
+    <Button
+        android:id="@+id/btnSalirA"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Salir"
+        android:backgroundTint="@color/lightBlue"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="16dp"/>
+</RelativeLayout>

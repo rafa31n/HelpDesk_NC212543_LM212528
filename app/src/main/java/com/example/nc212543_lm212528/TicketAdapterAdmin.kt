@@ -12,7 +12,7 @@ import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
 
-class TicketAdapterAdmin(private val tickets: List<Ticket>) :
+class TicketAdapterAdmin(private val tickets: MutableList<Ticket>) :
     RecyclerView.Adapter<TicketAdapterAdmin.ViewHolder>() {
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -36,38 +36,69 @@ class TicketAdapterAdmin(private val tickets: List<Ticket>) :
         val ticket = tickets[position]
         holder.textViewTitulo.text = ticket.titulo
         holder.textViewDescripcion.text = ticket.descripcion
-        holder.textViewUsuario.text = ticket.autorTicket
-        holder.textViewFechaCreacion.text = ticket.fechaCreacion
-        holder.textViewEstado.text = ticket.estado
+        holder.textViewUsuario.text = "Autor ticket: " + ticket.autorTicket
+        holder.textViewFechaCreacion.text = "Fecha creación: " + ticket.fechaCreacion
+        holder.textViewEstado.text = "Estado: " + ticket.estado
         holder.textViewFechaFinalizacion.text = ticket.fechaFinalizacion
         holder.btnFinalizar.setOnClickListener {
             // Maneja la acción de finalizar el ticket
-            finalizarTicket(ticket,holder)
+            finalizarTicket(ticket, holder)
         }
     }
-    private fun finalizarTicket(ticket: Ticket,holder:ViewHolder) {
+
+    private fun finalizarTicket(ticket: Ticket, holder: ViewHolder) {
         FirebaseDatabase.getInstance().getReference("tickets")
             .child(ticket.numTicket.toString())
             .child("estado")
             .setValue("Finalizado")
             .addOnSuccessListener {
                 // Actualización exitosa
-                Toast.makeText(holder.itemView.context, "Estado del ticket actualizado correctamente", Toast.LENGTH_SHORT).show()
+                Toast.makeText(
+                    holder.itemView.context,
+                    "Estado del ticket actualizado correctamente",
+                    Toast.LENGTH_SHORT
+                ).show()
 
                 // Actualiza la vista del ticket
-                holder.textViewEstado.text = "Finalizado"
-                holder.textViewFechaFinalizacion.text = getFechaActual()
+                holder.textViewFechaFinalizacion.text = "Fecha de finalización: " + getFechaActual()
+                tickets.removeAt(holder.adapterPosition)
+                notifyItemRemoved(holder.adapterPosition)
             }
             .addOnFailureListener {
                 // Error en la actualización
-                Toast.makeText(holder.itemView.context, "Error al actualizar el estado del ticket", Toast.LENGTH_SHORT).show()
+                Toast.makeText(
+                    holder.itemView.context,
+                    "Error al actualizar el estado del ticket",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+
+        //Cambiar fecha finalizacion
+        val fechaActual = getFechaActual()
+
+        FirebaseDatabase.getInstance().getReference("tickets")
+            .child(ticket.numTicket.toString())
+            .child("fechaFinalizacion")
+            .setValue(fechaActual)
+            .addOnSuccessListener {
+                //
+            }
+            .addOnFailureListener {
+                // Error en la actualización
+                Toast.makeText(
+                    holder.itemView.context,
+                    "Error al actualizar el estado del ticket",
+                    Toast.LENGTH_SHORT
+                ).show()
             }
     }
+
     fun getFechaActual(): String {
         val dateFormat = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
         val currentDate = Date()
         return dateFormat.format(currentDate)
     }
+
     override fun getItemCount(): Int {
         return tickets.size
     }

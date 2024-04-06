@@ -16,6 +16,7 @@ import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 
+
 class LoginActivity : AppCompatActivity() {
     //Declaracion variables
     private var edtCorreo: EditText? = null
@@ -105,10 +106,6 @@ class LoginActivity : AppCompatActivity() {
                                         )
                                     }
                                 })
-
-
-                            val intent = Intent(getBaseContext(), HomeUserActivity::class.java)
-                            startActivity(intent)
                         } else {
                             Toast.makeText(
                                 this,
