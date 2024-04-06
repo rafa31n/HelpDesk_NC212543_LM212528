@@ -2,7 +2,6 @@ package com.example.nc212543_lm212528
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.View
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
@@ -19,25 +18,29 @@ import com.google.firebase.database.ValueEventListener
 class HomeAdminActivity : AppCompatActivity() {
 
     private lateinit var databaseT: DatabaseReference
-    private lateinit var firebaseAuth: FirebaseAuth
+    private lateinit var auth: FirebaseAuth
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home_admin)
 
+        auth = FirebaseAuth.getInstance()
         val txtTitulo = findViewById<TextView>(R.id.textViewTitulo)
         val txtCorreo = findViewById<TextView>(R.id.textViewCorreo)
         val txtRol = findViewById<TextView>(R.id.textViewRol)
+        val txtDepto = findViewById<TextView>(R.id.textViewDepto)
         val datos: Bundle? = intent.getExtras()
         val nombreUsuario = datos?.getString("nombreUsuario").toString()
         val correoUsuario = datos?.getString("correoUsuario").toString()
         val rolUsuario = datos?.getString("rolUsuario").toString()
+        val deptoUsuario = datos?.getString("deptoUsuario").toString()
         txtTitulo.text = "Bienvenido " + nombreUsuario
         txtCorreo.text = correoUsuario
         txtRol.text = "Rol: " + rolUsuario
+        txtDepto.text = "Departamento: $deptoUsuario"
 
         val btnSalir = findViewById<Button>(R.id.btnSalirA)
         btnSalir.setOnClickListener {
-            firebaseAuth.signOut()
+            auth.signOut()
             startActivity(Intent(this@HomeAdminActivity, LoginActivity::class.java))
             Toast.makeText(this, "Cerraste sesión exitosamente", Toast.LENGTH_SHORT).show()
         }
@@ -49,50 +52,44 @@ class HomeAdminActivity : AppCompatActivity() {
                 override fun onDataChange(dataSnapshot: DataSnapshot) {
                     val tickets = mutableListOf<Ticket>()
 
-                    if (dataSnapshot.exists()) {
-                        for (snapshot in dataSnapshot.children) {
-                            val numTicket: Int? =
-                                snapshot.child("numTicket").getValue(Int::class.java)
-                            val titulo: String? =
-                                snapshot.child("titulo").getValue(String::class.java)
-                            val descripcion: String? =
-                                snapshot.child("descripcion").getValue(String::class.java)
-                            val departamento: String? =
-                                snapshot.child("departamento").getValue(String::class.java)
-                            val autor: String? =
-                                snapshot.child("autorTicket").getValue(String::class.java)
-                            val email: String? =
-                                snapshot.child("emailAutor").getValue(String::class.java)
-                            val fechaCreacion: String? =
-                                snapshot.child("fechaCreacion").getValue(String::class.java)
-                            val estado: String? =
-                                snapshot.child("estado").getValue(String::class.java)
-                            val fechaFinalizacion: String? =
-                                snapshot.child("fechaFinalizacion").getValue(String::class.java)
+                    for (snapshot in dataSnapshot.children) {
+                        val numTicket: Int? =
+                            snapshot.child("numTicket").getValue(Int::class.java)
+                        val titulo: String? =
+                            snapshot.child("titulo").getValue(String::class.java)
+                        val descripcion: String? =
+                            snapshot.child("descripcion").getValue(String::class.java)
+                        val departamento: String? =
+                            snapshot.child("departamento").getValue(String::class.java)
+                        val autor: String? =
+                            snapshot.child("autorTicket").getValue(String::class.java)
+                        val email: String? =
+                            snapshot.child("emailAutor").getValue(String::class.java)
+                        val fechaCreacion: String? =
+                            snapshot.child("fechaCreacion").getValue(String::class.java)
+                        val estado: String? =
+                            snapshot.child("estado").getValue(String::class.java)
+                        val fechaFinalizacion: String? =
+                            snapshot.child("fechaFinalizacion").getValue(String::class.java)
 
-                            val ticket =
-                                Ticket(
-                                    numTicket,
-                                    titulo,
-                                    descripcion,
-                                    departamento,
-                                    autor,
-                                    email,
-                                    fechaCreacion,
-                                    estado,
-                                    fechaFinalizacion
-                                )
-                            tickets.add(ticket)
-                        }
-
-                        recyclerView.layoutManager = LinearLayoutManager(this@HomeAdminActivity)
-                        recyclerView.adapter = TicketAdapterAdmin(tickets)
-                    } else {
-                        recyclerView.visibility = View.GONE
-                        val txtMensaje = findViewById<TextView>(R.id.textViewMensaje)
-                        txtMensaje.visibility = View.VISIBLE
-                        txtMensaje.text = "No hay tickets activos."
+                        val ticket =
+                            Ticket(
+                                numTicket,
+                                titulo,
+                                descripcion,
+                                departamento,
+                                autor,
+                                email,
+                                fechaCreacion,
+                                estado,
+                                fechaFinalizacion
+                            )
+                        tickets.add(ticket)
                     }
+
+                    recyclerView.layoutManager = LinearLayoutManager(this@HomeAdminActivity)
+                    recyclerView.adapter = TicketAdapterAdmin(tickets)
+
                 }
 
                 override fun onCancelled(databaseError: DatabaseError) {

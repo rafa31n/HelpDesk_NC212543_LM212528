@@ -78,4 +78,12 @@
                 android:text="Finalizar" />
         </LinearLayout>
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/txtMensaje"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="CONTENIDO"
+        android:textSize="14sp"
+        android:visibility="gone" />
 </androidx.cardview.widget.CardView>

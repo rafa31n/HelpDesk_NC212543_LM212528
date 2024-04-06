@@ -1,5 +1,6 @@
 package com.example.nc212543_lm212528
 
+import android.content.Context
 import android.content.Intent
 import android.util.Log
 import android.view.LayoutInflater
@@ -37,6 +38,13 @@ class TicketAdapterUser(private val tickets: MutableList<Ticket>) :
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        if (tickets.isEmpty()) {
+            // Mostrar un mensaje cuando la lista de tickets está vacía
+            showMessage(holder.itemView.context)
+            holder.itemView.visibility = View.GONE
+            return
+        }
+
         val ticket = tickets[position]
         holder.textViewTitulo.text = ticket.titulo
         holder.textViewDescripcion.text = ticket.descripcion
@@ -58,7 +66,7 @@ class TicketAdapterUser(private val tickets: MutableList<Ticket>) :
             }
         }
 
-        if (holder.textViewFechaFinalizacion.text.equals(null)) {
+        if (ticket.fechaFinalizacion.equals("")) {
             holder.textViewFechaFinalizacion.visibility = View.GONE
         }
 
@@ -138,6 +146,11 @@ class TicketAdapterUser(private val tickets: MutableList<Ticket>) :
     }
 
     override fun getItemCount(): Int {
-        return tickets.size
+        return if (tickets.isEmpty()) 1 else tickets.size
+    }
+
+    private fun showMessage(context: Context) {
+        // Muestra un mensaje cuando la lista de tickets está vacía
+        Toast.makeText(context, "La lista de tickets está vacía", Toast.LENGTH_SHORT).show()
     }
 }

@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">NC212543_LM212528</string>
+
+    <string-array name="opciones_spinner">
+        <item>Administración</item>
+        <item>Contabilidad</item>
+        <item>Informática</item>
+        <item>Secretaría</item>
+        <item>Ventas</item>
+    </string-array>
 </resources>

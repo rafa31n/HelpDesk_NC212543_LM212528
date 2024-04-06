@@ -5,11 +5,19 @@ class Usuario {
     var correo: String? = null
     var password: String? = null
     var rol: String? = null
+    var departamento: String? = null
 
-    constructor(nombre: String?, correo: String?, password: String?, rol: String?) {
+    constructor(
+        nombre: String?,
+        correo: String?,
+        password: String?,
+        rol: String?,
+        departamento: String?
+    ) {
         this.nombre = nombre
         this.correo = correo
         this.password = password
         this.rol = rol
+        this.departamento = departamento
     }
 }

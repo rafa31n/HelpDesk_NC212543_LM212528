@@ -1,5 +1,6 @@
 package com.example.nc212543_lm212528
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -33,12 +34,20 @@ class TicketAdapterAdmin(private val tickets: MutableList<Ticket>) :
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        if (tickets.isEmpty()) {
+            // Mostrar un mensaje cuando la lista de tickets está vacía
+            showMessage(holder.itemView.context)
+            holder.itemView.visibility = View.GONE
+            return
+        }
+
         val ticket = tickets[position]
+        holder.itemView.visibility = View.VISIBLE
         holder.textViewTitulo.text = ticket.titulo
         holder.textViewDescripcion.text = ticket.descripcion
-        holder.textViewUsuario.text = "Autor ticket: " + ticket.autorTicket
-        holder.textViewFechaCreacion.text = "Fecha creación: " + ticket.fechaCreacion
-        holder.textViewEstado.text = "Estado: " + ticket.estado
+        holder.textViewUsuario.text = ticket.autorTicket
+        holder.textViewFechaCreacion.text = ticket.fechaCreacion
+        holder.textViewEstado.text = ticket.estado
         holder.textViewFechaFinalizacion.text = ticket.fechaFinalizacion
         holder.btnFinalizar.setOnClickListener {
             // Maneja la acción de finalizar el ticket
@@ -47,50 +56,18 @@ class TicketAdapterAdmin(private val tickets: MutableList<Ticket>) :
     }
 
     private fun finalizarTicket(ticket: Ticket, holder: ViewHolder) {
-        FirebaseDatabase.getInstance().getReference("tickets")
-            .child(ticket.numTicket.toString())
-            .child("estado")
-            .setValue("Finalizado")
-            .addOnSuccessListener {
-                // Actualización exitosa
-                Toast.makeText(
-                    holder.itemView.context,
-                    "Estado del ticket actualizado correctamente",
-                    Toast.LENGTH_SHORT
-                ).show()
-
-                // Actualiza la vista del ticket
-                holder.textViewFechaFinalizacion.text = "Fecha de finalización: " + getFechaActual()
-                tickets.removeAt(holder.adapterPosition)
-                notifyItemRemoved(holder.adapterPosition)
-            }
-            .addOnFailureListener {
-                // Error en la actualización
-                Toast.makeText(
-                    holder.itemView.context,
-                    "Error al actualizar el estado del ticket",
-                    Toast.LENGTH_SHORT
-                ).show()
-            }
-
-        //Cambiar fecha finalizacion
         val fechaActual = getFechaActual()
-
-        FirebaseDatabase.getInstance().getReference("tickets")
+        val ticketsReferencia = FirebaseDatabase.getInstance().getReference("tickets")
             .child(ticket.numTicket.toString())
-            .child("fechaFinalizacion")
-            .setValue(fechaActual)
-            .addOnSuccessListener {
-                //
-            }
-            .addOnFailureListener {
-                // Error en la actualización
-                Toast.makeText(
-                    holder.itemView.context,
-                    "Error al actualizar el estado del ticket",
-                    Toast.LENGTH_SHORT
-                ).show()
-            }
+        ticketsReferencia.child("estado").setValue("Finalizado")
+        ticketsReferencia.child("fechaFinalizacion").setValue(fechaActual)
+        Toast.makeText(
+            holder.itemView.context,
+            "Ticket actualizados correctamente",
+            Toast.LENGTH_SHORT
+        ).show()
+        tickets.removeAt(holder.adapterPosition)
+        notifyItemRemoved(holder.adapterPosition)
     }
 
     fun getFechaActual(): String {
@@ -100,6 +77,11 @@ class TicketAdapterAdmin(private val tickets: MutableList<Ticket>) :
     }
 
     override fun getItemCount(): Int {
-        return tickets.size
+        return if (tickets.isEmpty()) 1 else tickets.size
+    }
+
+    private fun showMessage(context: Context) {
+        // Muestra un mensaje cuando la lista de tickets está vacía
+        Toast.makeText(context, "La lista de tickets está vacía", Toast.LENGTH_SHORT).show()
     }
 }

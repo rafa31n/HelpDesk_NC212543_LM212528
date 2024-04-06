@@ -26,6 +26,7 @@ class LoginActivity : AppCompatActivity() {
     var nombreUsuario: String = ""
     var correoUsuario: String = ""
     var rolUsuario: String = ""
+    var deptoUsuario: String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -76,6 +77,9 @@ class LoginActivity : AppCompatActivity() {
                                             rolUsuario =
                                                 snapshot.child("rol").getValue(String::class.java)
                                                     .toString()
+                                            deptoUsuario =
+                                                snapshot.child("departamento").getValue(String::class.java)
+                                                    .toString()
 
                                             if (rolUsuario.equals("user")) {
                                                 val intent = Intent(
@@ -85,6 +89,7 @@ class LoginActivity : AppCompatActivity() {
                                                 intent.putExtra("nombreUsuario", nombreUsuario)
                                                 intent.putExtra("correoUsuario", correoUsuario)
                                                 intent.putExtra("rolUsuario", rolUsuario)
+                                                intent.putExtra("deptoUsuario", deptoUsuario)
                                                 startActivity(intent)
                                             } else {
                                                 val intent = Intent(
@@ -94,6 +99,7 @@ class LoginActivity : AppCompatActivity() {
                                                 intent.putExtra("nombreUsuario", nombreUsuario)
                                                 intent.putExtra("correoUsuario", correoUsuario)
                                                 intent.putExtra("rolUsuario", rolUsuario)
+                                                intent.putExtra("deptoUsuario", deptoUsuario)
                                                 startActivity(intent)
                                             }
                                         }

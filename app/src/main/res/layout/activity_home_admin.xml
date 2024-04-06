@@ -22,7 +22,7 @@
         android:textColor="#000"
         android:textSize="20sp" />
 
-    <!---CORREO-->
+    <!---ROL-->
     <TextView
         android:id="@+id/textViewRol"
         android:layout_width="wrap_content"
@@ -32,31 +32,30 @@
         android:textColor="#000"
         android:textSize="20sp" />
 
+    <!---DEPARTAMENTO-->
+    <TextView
+        android:id="@+id/textViewDepto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textViewRol"
+        android:text="Departamento"
+        android:textColor="#000"
+        android:textSize="20sp" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewTicketsA"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/textViewRol" />
-
-    <TextView
-        android:id="@+id/textViewMensaje"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/recyclerViewTicketsA"
-        android:layout_marginTop="25dp"
-        android:text="Mensaje"
-        android:textColor="#000"
-        android:textSize="12sp"
-        android:visibility="gone" />
+        android:layout_below="@id/textViewDepto" />
 
     <Button
         android:id="@+id/btnSalirA"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Salir"
-        android:backgroundTint="@color/lightBlue"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_marginTop="30dp"
-        android:layout_marginEnd="16dp"/>
+        android:layout_marginEnd="16dp"
+        android:backgroundTint="@color/lightBlue"
+        android:text="Salir" />
 </RelativeLayout>

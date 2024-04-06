@@ -18,7 +18,7 @@ import com.google.firebase.database.ValueEventListener
 class HomeUserActivity : AppCompatActivity() {
     private lateinit var databaseT: DatabaseReference
     private lateinit var recyclerView: RecyclerView
-    private lateinit var firebaseAuth: FirebaseAuth
+    private lateinit var auth: FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,17 +33,21 @@ class HomeUserActivity : AppCompatActivity() {
     }
 
     private fun setupViews() {
+        auth = FirebaseAuth.getInstance()
         val txtTitulo = findViewById<TextView>(R.id.textViewTitulo)
         val txtCorreo = findViewById<TextView>(R.id.textViewCorreo)
         val txtRol = findViewById<TextView>(R.id.textViewRol)
+        val txtDepto = findViewById<TextView>(R.id.textViewDepto)
         val btnSalir = findViewById<Button>(R.id.btnSalirU)
         val datos: Bundle? = intent.extras
         val nombreUsuario = datos?.getString("nombreUsuario").toString()
         val correoUsuario = datos?.getString("correoUsuario").toString()
         val rolUsuario = datos?.getString("rolUsuario").toString()
+        val deptoUsuario = datos?.getString("deptoUsuario").toString()
         txtTitulo.text = "Bienvenido $nombreUsuario"
         txtCorreo.text = correoUsuario
         txtRol.text = "Rol: $rolUsuario"
+        txtDepto.text = "Departamento: $deptoUsuario"
 
         val btnCrearTicket = findViewById<Button>(R.id.btnAgregarTicket)
         btnCrearTicket.setOnClickListener {
@@ -51,11 +55,12 @@ class HomeUserActivity : AppCompatActivity() {
             intent.putExtra("nombreUsuario", nombreUsuario)
             intent.putExtra("correoUsuario", correoUsuario)
             intent.putExtra("rolUsuario", rolUsuario)
+            intent.putExtra("deptoUsuario", deptoUsuario)
             startActivity(intent)
         }
 
         btnSalir.setOnClickListener {
-            firebaseAuth.signOut()
+            auth.signOut()
             startActivity(Intent(this@HomeUserActivity, LoginActivity::class.java))
             Toast.makeText(this, "Cerraste sesión exitosamente", Toast.LENGTH_SHORT).show()
         }

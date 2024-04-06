@@ -23,7 +23,7 @@
         android:textColor="#000"
         android:textSize="20sp" />
 
-    <!---CORREO-->
+    <!---ROL-->
     <TextView
         android:id="@+id/textViewRol"
         android:layout_width="wrap_content"
@@ -33,12 +33,22 @@
         android:textColor="#000"
         android:textSize="20sp" />
 
+    <!---DEPARTAMENTO-->
+    <TextView
+        android:id="@+id/textViewDepto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textViewRol"
+        android:text="Departamento"
+        android:textColor="#000"
+        android:textSize="20sp" />
+
 
     <Button
         android:id="@+id/btnAgregarTicket"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/textViewRol"
+        android:layout_below="@id/textViewDepto"
         android:layout_marginTop="10dp"
         android:backgroundTint="@color/charcoal"
         android:enabled="true"

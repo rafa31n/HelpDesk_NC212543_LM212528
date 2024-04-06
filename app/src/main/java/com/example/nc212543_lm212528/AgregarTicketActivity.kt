@@ -32,6 +32,7 @@ class AgregarTicketActivity : AppCompatActivity() {
         val nombreUsuario = datos?.getString("nombreUsuario").toString()
         val correoUsuario = datos?.getString("correoUsuario").toString()
         val rolUsuario = datos?.getString("rolUsuario").toString()
+        val deptoUsuario = datos?.getString("deptoUsuario").toString()
 
         edtTitulo = findViewById<EditText>(R.id.editTextTitle)
         edtDescripcion = findViewById<EditText>(R.id.editTextDescription)
@@ -49,8 +50,8 @@ class AgregarTicketActivity : AppCompatActivity() {
                 val numeroTicket = Random.nextInt(101)
                 val fechaActual = getFechaActual()
                 val ticket = Ticket(
-                    numeroTicket, titulo, descripcion, "HelpDesk", nombreUsuario,
-                    correoUsuario, fechaActual, "Activo", null
+                    numeroTicket, titulo, descripcion, deptoUsuario, nombreUsuario,
+                    correoUsuario, fechaActual, "Activo", ""
                 )
                 database = FirebaseDatabase.getInstance().getReference("tickets")
 

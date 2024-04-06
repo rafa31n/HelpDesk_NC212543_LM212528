@@ -2,8 +2,10 @@ package com.example.nc212543_lm212528
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.EditText
+import android.widget.Spinner
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
@@ -26,8 +28,8 @@ class RegistrarActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_registrar)
-        auth = FirebaseAuth.getInstance()
 
+        auth = FirebaseAuth.getInstance()
         edtNombres = findViewById<EditText>(R.id.editTextName)
         edtApellido = findViewById<EditText>(R.id.editTextLastName)
         edtCorreo = findViewById<EditText>(R.id.editTextEmail)
@@ -35,18 +37,27 @@ class RegistrarActivity : AppCompatActivity() {
 
         val btnRegistrarse = findViewById<Button>(R.id.buttonSignUp)
 
+        //SPINNER
+        val spinner: Spinner = findViewById(R.id.spinner)
+        val opciones = resources.getStringArray(R.array.opciones_spinner)
+        val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, opciones)
+
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        spinner.adapter = adapter
+
         btnRegistrarse.setOnClickListener {
             val nombres: String = edtNombres?.text.toString()
             val apellido: String = edtApellido?.text.toString()
             val correo: String = edtCorreo?.text.toString()
             val password: String = edtPassword?.text.toString()
+            val departamento: String = spinner.selectedItem.toString()
 
-            if (nombres.isEmpty() || apellido.isEmpty() || correo.isEmpty() || password.isEmpty()) {
+            if (nombres.isEmpty() || apellido.isEmpty() || correo.isEmpty() || password.isEmpty() || departamento.isEmpty()) {
                 Toast.makeText(this, "Por favor, complete todos los campos", Toast.LENGTH_SHORT)
                     .show()
             } else {
                 val nombreCompleto = nombres.trim() + " " + apellido.trim()
-                signUp(correo, password, nombreCompleto)
+                signUp(correo, password, nombreCompleto, departamento)
             }
         }
 
@@ -58,12 +69,17 @@ class RegistrarActivity : AppCompatActivity() {
         }
     }
 
-    private fun signUp(email: String, password: String, nombreCompleto: String) {
+    private fun signUp(
+        email: String,
+        password: String,
+        nombreCompleto: String,
+        departamento: String
+    ) {
         auth.createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
                     Toast.makeText(this, "Registro exitoso", Toast.LENGTH_SHORT).show()
-                    guardarInformacion(nombreCompleto, email, password)
+                    guardarInformacion(nombreCompleto, email, password, departamento)
                 } else {
                     Toast.makeText(
                         this,
@@ -74,8 +90,13 @@ class RegistrarActivity : AppCompatActivity() {
             }
     }
 
-    fun guardarInformacion(nombreCompleto: String, correo: String, password: String) {
-        val usuario = Usuario(nombreCompleto, correo, password, "user")
+    fun guardarInformacion(
+        nombreCompleto: String,
+        correo: String,
+        password: String,
+        departamento: String
+    ) {
+        val usuario = Usuario(nombreCompleto, correo, password, "user", departamento)
         database = FirebaseDatabase.getInstance().getReference("usuarios")
 
         database.child(nombreCompleto.trim()).setValue(usuario).addOnSuccessListener {
@@ -87,3 +108,5 @@ class RegistrarActivity : AppCompatActivity() {
         }
     }
 }
+
+

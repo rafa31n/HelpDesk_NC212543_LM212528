@@ -43,11 +43,20 @@
             android:hint="Contraseña"
             android:inputType="textPassword" />
 
+        <Spinner
+            android:id="@+id/spinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/editTextPassword"
+            android:layout_marginTop="16dp"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp"/>
+
         <Button
             android:id="@+id/buttonSignUp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/editTextPassword"
+            android:layout_below="@id/spinner"
             android:layout_marginTop="16dp"
             android:backgroundTint="@color/charcoal"
             android:text="Registrarse" />
@@ -61,5 +70,6 @@
             android:layout_marginTop="16dp"
             android:text="¿Ya tienes una cuenta? Inicia sesión"
             android:textColor="@android:color/darker_gray" />
+
     </RelativeLayout>
 </RelativeLayout>
