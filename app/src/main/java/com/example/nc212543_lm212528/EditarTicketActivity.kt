@@ -26,6 +26,7 @@ class EditarTicketActivity : AppCompatActivity() {
         val nombreUsuario = datos?.getString("nombreUsuario").toString()
         val correoUsuario = datos?.getString("correoUsuario").toString()
         val rolUsuario = datos?.getString("rolUsuario").toString()
+        val deptoUsuario = datos?.getString("deptoUsuario").toString()
 
         edtTitulo = findViewById<EditText>(R.id.editTextTitle)
         edtDescripcion = findViewById<EditText>(R.id.editTextDescription)
@@ -55,6 +56,7 @@ class EditarTicketActivity : AppCompatActivity() {
                 intent.putExtra("nombreUsuario", nombreUsuario)
                 intent.putExtra("correoUsuario", correoUsuario)
                 intent.putExtra("rolUsuario", rolUsuario)
+                intent.putExtra("deptoUsuario", deptoUsuario)
                 this.startActivity(intent)
             }
 

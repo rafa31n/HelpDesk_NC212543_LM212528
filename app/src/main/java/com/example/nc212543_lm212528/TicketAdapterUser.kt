@@ -107,6 +107,8 @@ class TicketAdapterUser(private val tickets: MutableList<Ticket>) :
         var nombreUsuario: String = ""
         var correoUsuario: String = ""
         var rolUsuario: String = ""
+        var deptoUsuario: String = ""
+
         val databaseU: DatabaseReference = FirebaseDatabase.getInstance().getReference("usuarios")
 
         if (user != null) {
@@ -120,6 +122,8 @@ class TicketAdapterUser(private val tickets: MutableList<Ticket>) :
                                 .getValue(String::class.java).toString()
                             rolUsuario = snapshot.child("rol")
                                 .getValue(String::class.java).toString()
+                            deptoUsuario = snapshot.child("departamento")
+                                .getValue(String::class.java).toString()
                         }
 
                         val intent =
@@ -131,7 +135,7 @@ class TicketAdapterUser(private val tickets: MutableList<Ticket>) :
                         intent.putExtra("nombreUsuario", nombreUsuario)
                         intent.putExtra("correoUsuario", correoUsuario)
                         intent.putExtra("rolUsuario", rolUsuario)
-
+                        intent.putExtra("deptoUsuario", deptoUsuario)
                         holder.itemView.context.startActivity(intent)
                     }
 

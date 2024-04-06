@@ -61,6 +61,7 @@ class AgregarTicketActivity : AppCompatActivity() {
                     intent.putExtra("nombreUsuario", nombreUsuario)
                     intent.putExtra("correoUsuario", correoUsuario)
                     intent.putExtra("rolUsuario", rolUsuario)
+                    intent.putExtra("deptoUsuario", deptoUsuario)
                     startActivity(intent)
                 }.addOnFailureListener {
                     Toast.makeText(this, "No se pudo generar el ticket.", Toast.LENGTH_SHORT).show()
